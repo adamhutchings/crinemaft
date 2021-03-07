@@ -1,5 +1,5 @@
 name: macOS CI
-on [push, pull_request]
+on: [push, pull_request]
 jobs:
   build:
     runs_on: macos-latest
