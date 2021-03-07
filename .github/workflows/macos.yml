@@ -4,8 +4,8 @@ jobs:
   build:
     runs_on: macos-latest
     name: macOS compilation
-      steps:
-        - name: deps
-          run: brew install glfw
-        - name: build
-          run: ./scripts/build.sh
+    steps:
+      - name: deps
+        run: brew install glfw
+      - name: build
+        run: ./scripts/build.sh
