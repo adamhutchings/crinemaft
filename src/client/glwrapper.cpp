@@ -82,7 +82,7 @@ Shader::Shader(std::string name) {
     glLinkProgram(shaderProgram);
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, error_log);
+        glGetProgramInfoLog(shaderProgram, gl_error_len, NULL, error_log);
         std::cerr << "Error linking" << name << ":\n" << error_log << "\n";
         exit(-1);
     }
