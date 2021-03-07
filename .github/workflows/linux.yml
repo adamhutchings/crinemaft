@@ -1,0 +1,12 @@
+name: Linux CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Linux compilation
+    steps:
+      - uses: actions/checkout@v2
+      - name: deps
+        run: sudo apt-get build-dep glfw
+      - name: build
+        run: ./scripts/build.sh
