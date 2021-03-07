@@ -5,6 +5,9 @@
 
 #pragma once
 
+#include <iostream>
+#include <string>
+
 /**
  * OpenGL is deprecated on Apple.
  */
@@ -17,9 +20,18 @@
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
+#ifdef __APPLE__
+    #include <OpenGL/gl3.h>
+#else
+    #include <GL/gl3.h>
+#endif // __APPLE__
+
+#include <util.h>
+
 // Crinemaft GL
 namespace cmgl {
 
+    //// WINDOWING ////
     void init();
     void cleanup();
 
@@ -27,5 +39,10 @@ namespace cmgl {
     void update_window();
 
     bool window_open();
+
+    //// SHADERS ////
+    struct Shader {
+        Shader(std::string name);
+    };
 
 }
