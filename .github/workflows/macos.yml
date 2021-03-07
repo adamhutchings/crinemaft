@@ -2,7 +2,7 @@ name: macOS CI
 on: [push, pull_request]
 jobs:
   build:
-    runs_on: macos-latest
+    runs-on: macos-latest
     name: macOS compilation
     steps:
       - name: deps
