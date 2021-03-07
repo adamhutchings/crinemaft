@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deps
-        run: sudo cp /etc/apt/sources.list /etc/apt/sources.list~ && sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.listsudo && sudo apt-get build-dep glfw
+        run: sudo sed -i 's/# deb-src/deb-src/' /etc/apt/sources.list && sudo apt-get build-dep glfw
       - name: build
         run: ./scripts/build.sh
