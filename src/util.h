@@ -14,6 +14,6 @@ namespace util {
  * Get the full source of a file as a string - inefficient for large files, use
  * for smaller ones like shaders.
  */
-std::string get_full_source(std::ifstream& file);
+std::string get_full_source(std::ifstream const& file);
 
 }
