@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deps
-        run: sudo apt-get update && sudo apt-get build-dep glfw
+        run: echo "deb-src http://cran.ms.unimelb.edu.au/bin/linux/ubuntu" >> /etc/apt/sources.list && sudo apt-get update && sudo apt-get build-dep glfw
       - name: build
         run: ./scripts/build.sh
