@@ -5,8 +5,6 @@
 
 #pragma once
 
-#pragma once
-
 /**
  * OpenGL is deprecated on Apple.
  */
