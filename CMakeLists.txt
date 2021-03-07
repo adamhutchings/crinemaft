@@ -7,12 +7,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/build/debug")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
-find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
 include_directories(${OPENGL_INCLUDE_DIR})
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_CXX_FLAGS "-framework OpenGL")
+endif()
 
 add_executable(crinemaft ${SOURCES})
 target_include_directories(crinemaft PRIVATE src)
