@@ -128,4 +128,9 @@ void unload_vertices(VertexSet vs) {
     glDeleteBuffers(1, &(vs.vbo));
 }
 
+void VertexSet::draw() {
+    glBindVertexArray(this->vao);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
 }  // namespace cmgl
