@@ -48,10 +48,10 @@ void create_window() {
 void update_window() {
     while (!glfwWindowShouldClose(wn)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glfwSwapBuffers(wn);
         auto vs = load_vertices(sizeof vertices, vertices);
         vs.draw();
         unload_vertices(vs);
+        glfwSwapBuffers(wn);
         glfwPollEvents();
     }
 }
