@@ -105,4 +105,27 @@ void Shader::destroy() {
     glDeleteProgram(shaderID);
 }
 
+VertexSet load_vertices(int num, float* vertices) {
+    unsigned int vbo, vao;
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+    glBindVertexArray(vao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+}
+
+void unload_vertices(VertexSet vs) {
+    glDeleteVertexArrays(1, &(vs.vao));
+    glDeleteBuffers(1, &(vs.vbo));
+}
+
 }  // namespace cmgl

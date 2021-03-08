@@ -51,4 +51,13 @@ namespace cmgl {
         void destroy();
     };
 
+    class VertexSet {
+        unsigned int vao, vbo;
+        friend VertexSet load_vertices(int num, float* vertices);
+        friend void unload_vertices(VertexSet vs);
+    };
+
+    VertexSet load_vertices(int num, float* vertices);
+    void unload_vertices(VertexSet vs);
+
 }
