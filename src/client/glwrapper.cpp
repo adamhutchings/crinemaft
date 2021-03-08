@@ -89,6 +89,12 @@ Shader::Shader(std::string name) {
     glDeleteShader(vshad);
     glDeleteShader(fshad);
 
+    this->shaderID = shaderProgram;
+
+}
+
+void Shader::bind() {
+    glUseProgram(shaderID);
 }
 
 }  // namespace cmgl
