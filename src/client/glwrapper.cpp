@@ -41,7 +41,6 @@ void cleanup() {
 
 void create_window() {
     wn = glfwCreateWindow(500, 500, "Crinemaft", NULL, NULL);
-    glfwMakeContextCurrent(wn);
     glViewport(0, 0, 500, 500);
     sh = new Shader("block");
     sh->bind();
