@@ -41,8 +41,14 @@ namespace cmgl {
     bool window_open();
 
     //// SHADERS ////
-    struct Shader {
+    class Shader {
+    private:
+        int shaderID;
+    public:
         Shader(std::string name);
+        void bind();
+        void unbind();
+        void destroy();
     };
 
 }
