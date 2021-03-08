@@ -14,7 +14,7 @@ include_directories(${OPENGL_INCLUDE_DIR})
 file(GLOB_RECURSE SOURCES src/*.cpp)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    #set(CMAKE_CXX_FLAGS "-framework OpenGL")
+    set(CMAKE_CXX_FLAGS "-framework OpenGL")
 else()
     find_package(OpenGL REQUIRED)
 endif()
