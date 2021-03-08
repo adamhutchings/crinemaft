@@ -30,6 +30,7 @@ void init() {
     glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif // __APPLE__
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
 }
 
 void cleanup() {
@@ -41,6 +42,7 @@ void cleanup() {
 void create_window() {
     wn = glfwCreateWindow(500, 500, "Crinemaft", NULL, NULL);
     glfwMakeContextCurrent(wn);
+    glViewport(0, 0, 500, 500);
     sh = new Shader("block");
     sh->bind();
 }
