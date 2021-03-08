@@ -121,6 +121,11 @@ VertexSet load_vertices(int num, float* vertices) {
     // color attribute
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    VertexSet vs;
+    vs.vao = vao;
+    vs.vbo = vbo;
+    return vs;
 }
 
 void unload_vertices(VertexSet vs) {
