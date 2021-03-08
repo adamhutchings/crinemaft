@@ -6,4 +6,5 @@ int main(int argc, char** argv) {
     while (cmgl::window_open()) {
         cmgl::update_window();
     }
+    cmgl::cleanup();
 }
