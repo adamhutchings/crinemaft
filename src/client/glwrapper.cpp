@@ -97,4 +97,12 @@ void Shader::bind() {
     glUseProgram(shaderID);
 }
 
+void Shader::unbind() {
+    glUseProgram(0);
+}
+
+void Shader::destroy() {
+    glDeleteProgram(shaderID);
+}
+
 }  // namespace cmgl
