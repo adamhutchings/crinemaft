@@ -124,6 +124,7 @@ void Shader::destroy() {
 }
 
 VertexSet load_vertices(int num, float* vertices) {
+    
     unsigned int vbo, vao;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -144,6 +145,7 @@ VertexSet load_vertices(int num, float* vertices) {
     vs.vao = vao;
     vs.vbo = vbo;
     return vs;
+
 }
 
 void unload_vertices(VertexSet vs) {
