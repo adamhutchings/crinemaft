@@ -8,6 +8,16 @@ namespace {
     // How many characters an error message can be max
     int const gl_error_len = 512;
 
+    float vertices[] = {
+        // positions         // colors
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
+
+    };
+
+    cmgl::Shader* sh;
+
 }
 
 namespace cmgl {
@@ -23,18 +33,25 @@ void init() {
 }
 
 void cleanup() {
+    sh->destroy();
+    delete sh;
     glfwTerminate();
 }
 
 void create_window() {
     wn = glfwCreateWindow(500, 500, "Crinemaft", NULL, NULL);
     glfwMakeContextCurrent(wn);
+    sh = new Shader("block");
+    sh->bind();
 }
 
 void update_window() {
     while (!glfwWindowShouldClose(wn)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwSwapBuffers(wn);
+        auto vs = load_vertices(sizeof vertices, vertices);
+        vs.draw();
+        unload_vertices(vs);
         glfwPollEvents();
     }
 }
@@ -47,9 +64,10 @@ Shader::Shader(std::string name) {
 
     std::string vpath = std::string("src/shader/") + name + "_vert.glsl";
     std::string fpath = std::string("src/shader/") + name + "_frag.glsl";
-    char const* vsrc = util::get_full_source(std::ifstream(vpath)).c_str();
-    char const* fsrc = util::get_full_source(std::ifstream(fpath)).c_str();
-
+    std::string vsss = util::get_full_source(std::ifstream(vpath));
+    std::string fsss = util::get_full_source(std::ifstream(fpath));
+    char const* vsrc = vsss.c_str();
+    char const* fsrc = fsss.c_str();
     int success;
     char error_log[gl_error_len];
 
@@ -60,18 +78,18 @@ Shader::Shader(std::string name) {
     glGetShaderiv(vshad, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(vshad, gl_error_len, NULL, error_log);
-        std::cerr << "Error compiling" << vpath << ":\n" << error_log << "\n";
+        std::cerr << "Error compiling " << vpath << ":\n" << error_log << "\n";
         exit(-1);
     }
 
     // Compile fragment shader
-    int fshad = glCreateShader(GL_VERTEX_SHADER);
+    int fshad = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fshad, 1, &fsrc, NULL);
     glCompileShader(fshad);
     glGetShaderiv(fshad, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(fshad, gl_error_len, NULL, error_log);
-        std::cerr << "Error compiling" << fpath << ":\n" << error_log << "\n";
+        std::cerr << "Error compiling " << fpath << ":\n" << error_log << "\n";
         exit(-1);
     }
 
@@ -83,7 +101,7 @@ Shader::Shader(std::string name) {
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(shaderProgram, gl_error_len, NULL, error_log);
-        std::cerr << "Error linking" << name << ":\n" << error_log << "\n";
+        std::cerr << "Error linking " << name << ":\n" << error_log << "\n";
         exit(-1);
     }
     glDeleteShader(vshad);
